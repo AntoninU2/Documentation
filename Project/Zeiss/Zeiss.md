@@ -49,5 +49,3 @@ Le schéma ci-dessous illustre le fonctionnement général :
 
 Ce système assure une communication robuste entre l'OPC UA et le processus industriel. En imposant le passage systématique par une interface dédiée, il garantit une séparation claire des responsabilités et une meilleure gestion des données dans l'automate B&R.
 
-N'hésitez pas à proposer des améliorations ou poser des questions !
-
