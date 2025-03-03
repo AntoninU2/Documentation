@@ -7,7 +7,6 @@ This guide provides detailed instructions on how to establish and manage an OPC 
 ## Prerequisites ✅
 
 - An operational OPC UA server.
-- Familiarity with Structured Text (ST) programming.
 - A properly configured PLC with OPC UA capabilities.
 
 ## Establishing a Connection to the Ltu LathingA1 OPC UA Server 🔗📡
