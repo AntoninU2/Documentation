@@ -48,7 +48,7 @@ END_VAR
 To establish a connection to the OPC UA server, configure the function block as follows:
 
 ```structured-text
-FbOpcUaConnectToServer.Connect := ServerState = UASS_Running;
+FbOpcUaConnectToServer.Connect := TRUE;
 FbOpcUaConnectToServer.Reset := gBP.ErrorReset;
 FbOpcUaConnectToServer.ServerEndpointUrl := 'opc.tcp://opcuaserver.com:48010';
 FbOpcUaConnectToServer.NamespaceUri := 'http://www.unifiedautomation.com/DemoServer/';
