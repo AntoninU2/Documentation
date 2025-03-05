@@ -16,7 +16,7 @@ This guide provides detailed instructions on how to establish and manage an OPC 
 Before establishing a connection, declare the connection function block:
 
 ```structured-text
-(* Connect to Ltu server *)
+(* Connect to server *)
 VAR
     FbOpcUaConnectToServer : FB_OpcUaCli_Connect;
 END_VAR
