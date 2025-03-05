@@ -4,7 +4,7 @@
 
 This documentation is intended for internal use within **Unista**. It provides technical guidelines and best practices across various automation and industrial control topics.
 
-## Scope 🏗️
+## Scope 📏
 
 The documentation covers:
 
