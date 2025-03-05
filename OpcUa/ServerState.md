@@ -35,7 +35,9 @@ The function returns one of the following enumerated values:
 ```structured-text
 (* Retrieve OPC UA Server State *)
 ServerState := UaSrv_GetServerState();  (* Get B&R server status *)
+```
 
+```structured-text
 VAR
     ServerState : UAServerState; (* Holds the current OPC UA server state *)
 END_VAR
