@@ -1,4 +1,4 @@
-# OPC UA Methods Guide 🛠️📡
+# OPC UA Methods Guide as client 🛠️📡
 
 ## Overview 🚀
 
@@ -9,6 +9,26 @@ This guide explains how to execute methods on an OPC UA server using `FbMethodPr
 - An operational OPC UA server.
 - A properly configured PLC with OPC UA capabilities.
 - A valid connection to the OPC UA server.
+
+## Function Block Structure
+
+### `FB_OpcUaCli_Method`
+
+This function block is responsible for handling OPC UA client method calls.
+
+#### Input Variables:
+- **Execute**: Triggers the execution of the method call.
+- **Reset**: Resets the execution state.
+- **ConnectionHdl**: Handle of the active OPC UA connection.
+- **ObjectNodeID**: Node ID of the object containing the method.
+- **MethodNodeID**: Node ID of the method to be called.
+- **InputArguments**: Array of up to 10 input arguments required by the method.
+- **OutputArguments**: Array of up to 10 output arguments to store the method results.
+
+#### Output Variables:
+- **Error**: Indicates if an error occurred during execution.
+- **ErrorID**: Error identifier providing details on the issue.
+- **Done**: Indicates if the method call was successfully completed.
 
 ## Setting Up Method Execution ⚙️
 
@@ -23,14 +43,12 @@ VAR
 END_VAR
 ```
 
-📌 Declare `FbMethodProgramToUseLathingA1` to handle OPC UA method calls.
-
 ### Configuring the Method Call 🔧
 
 To call a method, configure `FbMethodProgramToUseLathingA1` as follows:
 
 ```structured-text
-(***************** Method*****************)
+(***************** Method *****************)
 // ProgramToUse in Lathing A1
 FbMethodProgramToUseLathingA1.Execute := ExecuteMethod1;
 FbMethodProgramToUseLathingA1.Reset := gBP.ErrorReset;
@@ -55,21 +73,23 @@ FbMethodProgramToUseLathingA1.OutputArguments[0].Value := '::UM_Logic:Output';
 FbMethodProgramToUseLathingA1();
 ```
 
-📌 Ensure `Execute` is set to trigger the method call.
-📌 Define `ObjectNodeID` and `MethodNodeID` to reference the OPC UA method.
-📌 Set input arguments before executing the method.
-📌 Store the method result in `OutputArguments`.
-📌 The variables (`::UM_Logic:Input1`, `::UM_Logic:Input2`, `::UM_Logic:Output`) must be declared internally and match the expected data type of the OPC UA method.
+### Explanation 🔍
+
+- `Execute`: Triggers the method call.
+- `ObjectNodeID`: References the object containing the method.
+- `MethodNodeID`: Specifies the method to be executed.
+- `InputArguments`: Defines the input parameters for the method.
+- `OutputArguments`: Stores the result of the method execution.
 
 ## Understanding ObjectNodeID and MethodNodeID 🔍
 
 ### ObjectNodeID 🏷️
 
-The `ObjectNodeID` represents the object that contains the method. In the example, it is set to `'Demo.Method'`. This means that the method belongs to an object node within the OPC UA server.
+The `ObjectNodeID` represents the object that contains the method. In the example, it is set to `'Demo.Method'`, meaning the method belongs to an object node within the OPC UA server.
 
 ### MethodNodeID ⚙️
 
-The `MethodNodeID` identifies the specific method to be called. In this case, it is `'Demo.Method.Multiply'`, which means that the method `Multiply` is part of the `Demo.Method` object.
+The `MethodNodeID` identifies the specific method to be called. In this case, it is `'Demo.Method.Multiply'`, meaning the method `Multiply` is part of the `Demo.Method` object.
 
 Both `ObjectNodeID` and `MethodNodeID` must be correctly referenced for the method call to succeed.
 
@@ -105,3 +125,4 @@ Choosing the correct identifier type ensures proper method execution and access 
 ## Conclusion 🎯✅
 
 This guide explains how to execute methods on an OPC UA server, configure method nodes, define arguments, and troubleshoot potential issues. Always verify the namespace index, identifier types, and variable data types before execution to ensure a successful method call.
+
