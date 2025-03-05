@@ -110,7 +110,7 @@ To invoke the method using **UaExpert** or another OPC UA client:
 
 1. Ensure **read and execute rights** are assigned to the method.
 2. Connect to the OPC UA server.
-3. Locate `StartProduction` in the **Methods** section.
+3. Locate `MyMethodName` in the **Methods** section.
 4. Enter values for `WorkOrderNumber` and `Area`.
 5. Execute the method and observe the results.
 
