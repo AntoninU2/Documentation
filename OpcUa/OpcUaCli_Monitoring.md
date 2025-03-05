@@ -44,7 +44,13 @@ VAR
     FbMonitorVariables  : FB_OpcUaCli_Monitor;
 END_VAR
 ```
-
+```structured-text
+(* Monitoring variable *)
+VAR
+    MonitorMachineRate   : REAL;
+    MonitorMachineStart  : BOOL;
+END_VAR
+```
 ### Monitoring Configuration ⚙️
 
 To set up monitored items, configure `FbMonitorVariables` as follows:
@@ -56,16 +62,16 @@ FbMonitorVariables.Reset               := gBP.ErrorReset;
 FbMonitorVariables.ConnectionHdl       := FbOpcUaConnectToServer.ConnectionHdl;
 
 FbMonitorVariables.IsActive[0]                   := TRUE;
-FbMonitorVariables.NodeID_0[0].NamespaceIndex    := 2;
+FbMonitorVariables.NodeID_0[0].NamespaceIndex    := FbOpcUaConnectToServer.NamespaceIndex; //Index of the URI namespace
 FbMonitorVariables.NodeID_0[0].Identifier        := 'Demo.Dynamic.Scalar.String';
 FbMonitorVariables.NodeID_0[0].IdentifierType    := UAIdentifierType_String;
-FbMonitorVariables.Variable[0]                   := '::UM_Logic:MonitorLtuRecipeName';
+FbMonitorVariables.Variable[0]                   := '::UM_Logic:MonitorMachineRate';
 
 FbMonitorVariables.IsActive[1]                   := TRUE;
-FbMonitorVariables.NodeID_0[1].NamespaceIndex    := 3;
+FbMonitorVariables.NodeID_0[1].NamespaceIndex    := 3;    //Index of the specific namespace
 FbMonitorVariables.NodeID_0[1].Identifier        := 'Demo.Dynamic.Scalar.DateTime';
 FbMonitorVariables.NodeID_0[1].IdentifierType    := UAIdentifierType_String;
-FbMonitorVariables.Variable[1]                   := '::UM_Logic:MonitorLtuRecipeName1';
+FbMonitorVariables.Variable[1]                   := '::UM_Logic:MonitorMachineStart';
 ```
 
 ### Explanation 🔍
