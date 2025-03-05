@@ -57,7 +57,7 @@ To set up monitored items, configure `FbMonitorVariables` as follows:
 
 ```structured-text
 (***************** Monitoring *****************)
-FbMonitorVariables.Execute             := TRUE;
+FbMonitorVariables.Execute             := FbOpcUaConnectToServer.Connected;
 FbMonitorVariables.Reset               := gBP.ErrorReset;
 FbMonitorVariables.ConnectionHdl       := FbOpcUaConnectToServer.ConnectionHdl;
 
