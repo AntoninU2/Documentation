@@ -2,7 +2,7 @@
 
 ## Overview 🚀
 
-This guide explains how to execute methods on an OPC UA server using `FbMethodProgramToUseLathingA1`. It details how to configure object nodes, method nodes, input and output arguments, and properly call a method.
+This guide explains how to execute methods on an OPC UA server using `FbMethodMultiply`. It details how to configure object nodes, method nodes, input and output arguments, and properly call a method.
 
 ## Prerequisites ✅
 
@@ -39,38 +39,46 @@ Before executing a method, declare the function block:
 ```structured-text
 (* Method Execution Setup *)
 VAR
-    FbMethodProgramToUseLathingA1 : FB_OpcUaCli_Method;
+    FbMethodMultiply : FB_OpcUaCli_Method;
 END_VAR
 ```
+```structured-text
 
+(* Method variables Setup *)
+VAR
+    Input1 : REAL;
+    Input2 : REAL;
+    Output : REAL;
+END_VAR
+```
 ### Configuring the Method Call 🔧
 
-To call a method, configure `FbMethodProgramToUseLathingA1` as follows:
+To call a method, configure `FbMethodMultiply` as follows:
 
 ```structured-text
 (***************** Method *****************)
-// ProgramToUse in Lathing A1
-FbMethodProgramToUseLathingA1.Execute := ExecuteMethod1;
-FbMethodProgramToUseLathingA1.Reset := gBP.ErrorReset;
-FbMethodProgramToUseLathingA1.ConnectionHdl := FbOpcUaConnectLathingA1.ConnectionHdl;
+// Multiply
+FbMethodMultiply.Execute := ExecuteMethod1;
+FbMethodMultiply.Reset := gBP.ErrorReset;
+FbMethodMultiply.ConnectionHdl := FbOpcUaConnectToServer.ConnectionHdl;
 
-FbMethodProgramToUseLathingA1.ObjectNodeID.NamespaceIndex := FbOpcUaConnectLathingA1.NamespaceIndex;
-FbMethodProgramToUseLathingA1.ObjectNodeID.Identifier := 'Demo.Method';
-FbMethodProgramToUseLathingA1.ObjectNodeID.IdentifierType := UAIdentifierType_String;
+FbMethodMultiply.ObjectNodeID.NamespaceIndex    := FbOpcUaConnectToServer.NamespaceIndex;
+FbMethodMultiply.ObjectNodeID.Identifier        := 'Demo.Method';
+FbMethodMultiply.ObjectNodeID.IdentifierType    := UAIdentifierType_String;
 
-FbMethodProgramToUseLathingA1.MethodNodeID.NamespaceIndex := FbOpcUaConnectLathingA1.NamespaceIndex;
-FbMethodProgramToUseLathingA1.MethodNodeID.Identifier := 'Demo.Method.Multiply';
-FbMethodProgramToUseLathingA1.MethodNodeID.IdentifierType := UAIdentifierType_String;
+FbMethodMultiply.MethodNodeID.NamespaceIndex    := FbOpcUaConnectToServer.NamespaceIndex;
+FbMethodMultiply.MethodNodeID.Identifier        := 'Demo.Method.Multiply';
+FbMethodMultiply.MethodNodeID.IdentifierType    := UAIdentifierType_String;
 
-FbMethodProgramToUseLathingA1.InputArguments[0].Name := 'a';
-FbMethodProgramToUseLathingA1.InputArguments[0].Value := '::UM_Logic:Input1';
-FbMethodProgramToUseLathingA1.InputArguments[1].Name := 'b';
-FbMethodProgramToUseLathingA1.InputArguments[1].Value := '::UM_Logic:Input2';
+FbMethodMultiply.InputArguments[0].Name         := 'a';
+FbMethodMultiply.InputArguments[0].Value        := '::UM_Logic:Input1';
+FbMethodMultiply.InputArguments[1].Name         := 'b';
+FbMethodMultiply.InputArguments[1].Value        := '::UM_Logic:Input2';
 
-FbMethodProgramToUseLathingA1.OutputArguments[0].Name := 'result';
-FbMethodProgramToUseLathingA1.OutputArguments[0].Value := '::UM_Logic:Output';
+FbMethodMultiply.OutputArguments[0].Name        := 'result';
+FbMethodMultiply.OutputArguments[0].Value       := '::UM_Logic:Output';
 
-FbMethodProgramToUseLathingA1();
+FbMethodMultiply();
 ```
 
 ### Explanation 🔍
