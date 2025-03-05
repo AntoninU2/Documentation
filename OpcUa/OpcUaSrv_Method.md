@@ -21,6 +21,19 @@ VAR
     FbMethodName : FB_OpcUaSrv_Method;
 END_VAR
 ```
+
+### Declaring the Corresponding Structure 🏗️
+
+Define the structure that corresponds to the method:
+
+```structured-text
+udt_MyMethodName : STRUCT  
+    WorkOrderNumber : STRING[255]; (* WorkOrder number to be resumed *)
+    Area : STRING[255]; (* "Entire cell", "Side A" or "Side B" *)
+    Status : BOOL;
+END_STRUCT;
+```
+
 ### Configuring the Method ⚙️
 
 Define the method `FbMethodName` on the OPC UA server:
@@ -31,7 +44,7 @@ FbMethodName.Execute := ServerState = UASS_Running;
 FbMethodName.Reset := gBP.ErrorReset;
 FbMethodName.MethodeName := 'MyMethodName';
 IF FbMethodName.IsCalled THEN
-    OpcUaInterface.ErrorInterfaceID := NoError; //No obligation, better for debugging 
+    OpcUaInterface.ErrorInterfaceID := NoError;
     OpcUaCell.Methods.MyMethodName.Status := TRUE; //Adding status to return with the method if the execution is true or false
 
     //Replace the code by yours
@@ -71,15 +84,15 @@ To declare an OPC UA method in Automation Studio:
 ### Example `.uam` Method Declaration 📄
 
 ```structured-text
-OPCUA_METHOD MyMethodName
+OPCUA_METHOD StartProduction
     ARG_INPUT
-        WorkOrderNumber : String := MyMethodName.WorkOrderNumber;
-        Area : String := MyMethodName.Area;
+        WorkOrderNumber : String := DataStartProduction.WorkOrderNumber;
+        Area : String := DataStartProduction.Area;
     END_ARG
 END_OPCUA_METHOD
 ```
 
-📌 The `.uam` file registers `MyMethodName` as an OPC UA method.
+📌 The `.uam` file registers `StartProduction` as an OPC UA method.
 📌 The method takes two input arguments: `WorkOrderNumber` and `Area`.
 📌 The values of these arguments are linked to process variables on the server.
 
