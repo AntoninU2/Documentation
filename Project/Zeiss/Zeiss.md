@@ -19,6 +19,10 @@ Les variables qui communiquent directement avec l'OPC UA sont encapsulées dans 
 - **`udt_OpcUa_Cell`**
 - **`udt_OpcUa_Ltu`**
 
+Les variables qui communiquent directement avec le process sont encapsulées dans une structure spécifique :
+
+- **`udt_OpcUa_Interface`**
+
 Ces structures contiennent des sous-structures et servent de passerelle entre l'OPC UA et l'interface du programme.
 
 ### Liaison des Variables
@@ -26,13 +30,13 @@ Ces structures contiennent des sous-structures et servent de passerelle entre l'
 Chaque variable de l'interface suit une règle stricte de passage par une variable OPC UA avant d'être utilisée. Exemple de liaison entre une variable de production et l'OPC UA :
 
 ```pascal
-OpcUaInterface.HoldProduction.WorkOrderNumber := DataHoldProduction.WorkOrderNumber;
+OpcUaInterface.Methods.HoldProduction.Data.WorkOrderNumber		:= OpcUaCell.Methods.HoldProduction.WorkOrderNumber;
 ```
 
 Dans cet exemple :
 
-- `DataHoldProduction.WorkOrderNumber` provient d'une méthode OPC UA.
-- `OpcUaInterface.HoldProduction.WorkOrderNumber` sert d'interface pour l'OPC UA.
+- `OpcUaCell.Methods.HoldProduction.WorkOrderNumber` provient d'une méthode OPC UA.
+- `OpcUaInterface.Methods.HoldProduction.Data.WorkOrderNumber` sert d'interface pour l'OPC UA.
 - Le process accède à cette valeur via `udt_OpcUaInterface`.
 
 ## Schéma de Communication
@@ -44,8 +48,3 @@ Le schéma ci-dessous illustre le fonctionnement général :
 - Le **processus** utilise ces variables pour exécuter des opérations industrielles.
 
 *(Voir le diagramme fourni pour plus de détails.)*
-
-## Conclusion
-
-Ce système assure une communication robuste entre l'OPC UA et le processus industriel. En imposant le passage systématique par une interface dédiée, il garantit une séparation claire des responsabilités et une meilleure gestion des données dans l'automate B&R.
-
