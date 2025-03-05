@@ -2,7 +2,7 @@
 
 ## Overview 🚀
 
-This guide provides detailed instructions on how to establish and manage an OPC UA connection using `FbOpcUaConnectLathingA1`, as well as utilizing function blocks such as `UA_Connect` and `UA_GetNamespaceIndex`.
+This guide provides detailed instructions on how to establish and manage an OPC UA connection using `FbOpcUaConnectToServer`, as well as utilizing function blocks such as `UA_Connect` and `UA_GetNamespaceIndex`.
 
 ## Prerequisites ✅
 
