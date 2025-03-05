@@ -30,7 +30,7 @@ This function block establishes and manages an OPC UA connection.
 - **NamespaceIndex**: The retrieved namespace index.
 - **ConnectionHdl**: Connection handle.
 
-## Establishing a Connection to the Ltu LathingA1 OPC UA Server 📎🛏️
+## Establishing a Connection to the Ltu LathingA1 OPC UA Server 📎🛏
 
 ### Variable Declaration 📝
 
@@ -101,7 +101,7 @@ END_IF
 - Establishes a connection to the OPC UA server.
 - Checks for a successful connection and stores the connection handle.
 
-## Retrieving the Namespace Index Using `UA_GetNamespaceIndex` 💂🔍
+## Retrieving the Namespace Index Using `UA_GetNamespaceIndex` 🔍
 
 This function block reads the namespace index from the OPC UA server.
 
