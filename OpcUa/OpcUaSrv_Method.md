@@ -2,7 +2,7 @@
 
 ## Overview 🚀
 
-This guide explains how to declare a method on an OPC UA server so that it can be invoked by an OPC UA client. The method `StartProduction` will be exposed on the server, allowing clients to pass input parameters and receive a response.
+This guide explains how to declare a method on an OPC UA server so that it can be invoked by an OPC UA client. The method `MyMethodName` will be exposed on the server, allowing clients to pass input parameters and receive a response.
 
 ## Prerequisites ✅
 
@@ -51,7 +51,6 @@ IF FbMethodName.IsCalled THEN
     IF '' <> OpcUaCell.Methods.MyMethodName.WorkOrderNumber THEN
         OpcUaInterface.Methods.MyMethodName.WorkOrderRequest := TRUE;
         OpcUaInterface.Methods.MyMethodName.Data.WorkOrderNumber := OpcUaCell.Methods.MyMethodName.WorkOrderNumber;
-        MethodStartProductionDone := TRUE;
     ELSIF 'Entire cell' = OpcUaCell.Methods.MyMethodName.Area THEN
         OpcUaInterface.Methods.MyMethodName.EntireCellRequest := TRUE;        
     ELSIF 'Side A' = OpcUaCell.Methods.MyMethodName.Area THEN
@@ -84,17 +83,18 @@ To declare an OPC UA method in Automation Studio:
 ### Example `.uam` Method Declaration 📄
 
 ```structured-text
-OPCUA_METHOD StartProduction
+OPCUA_METHOD MyMethodName
     ARG_INPUT
-        WorkOrderNumber : String := DataStartProduction.WorkOrderNumber;
-        Area : String := DataStartProduction.Area;
+        WorkOrderNumber : String := MyMethodName.WorkOrderNumber;
+        Area : String := MyMethodName.Area;
     END_ARG
 END_OPCUA_METHOD
 ```
 
-📌 The `.uam` file registers `StartProduction` as an OPC UA method.
+📌 The `.uam` file registers `MyMethodName` as an OPC UA method.
 📌 The method takes two input arguments: `WorkOrderNumber` and `Area`.
 📌 The values of these arguments are linked to process variables on the server.
+📌 In your Configuration > OpcUaMap.uad, don't forget to enable the MyMethodName tag.
 
 ## Executing the Method at Runtime 🔄
 
