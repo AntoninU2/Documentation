@@ -45,7 +45,7 @@ VAR
 END_VAR
 ```
 ```structured-text
-(* Monitoring variable *)
+(* Monitoring variables *)
 VAR
     MonitorMachineRate   : REAL;
     MonitorMachineStart  : BOOL;
