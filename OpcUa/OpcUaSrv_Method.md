@@ -18,46 +18,40 @@ Before exposing a method, declare the function block:
 
 ```structured-text
 VAR
-    MethodStartProductionDone : BOOL;
-    FbMethodStartProduction : FB_OpcUaSrv_Method;
-    DataStartProduction : udt_MethodStartProduction;
+    FbMethodName : FB_OpcUaSrv_Method;
 END_VAR
 ```
-
-📌 `FbMethodStartProduction` is used to define and handle the method execution.
-📌 `DataStartProduction` stores input parameters received from the client.
-
 ### Configuring the Method ⚙️
 
-Define the method `StartProduction` on the OPC UA server:
+Define the method `FbMethodName` on the OPC UA server:
 
 ```structured-text
-// StartProduction Method
-FbMethodStartProduction.Execute := ServerState = UASS_Running;
-FbMethodStartProduction.Reset := gBP.ErrorReset;
-FbMethodStartProduction.MethodeName := 'StartProduction';
+// MyMethodName Method
+FbMethodName.Execute := ServerState = UASS_Running;
+FbMethodName.Reset := gBP.ErrorReset;
+FbMethodName.MethodeName := 'MyMethodName';
+IF FbMethodName.IsCalled THEN
+    OpcUaInterface.ErrorInterfaceID := NoError; //No obligation, better for debugging 
+    OpcUaCell.Methods.MyMethodName.Status := TRUE; //Adding status to return with the method if the execution is true or false
 
-IF FbMethodStartProduction.IsCalled THEN
-    OpcUaInterface.ErrorInterfaceID := NoError;
-    
-    // Replace this section with the logic specific to your application
-    IF '' <> DataStartProduction.WorkOrderNumber THEN
-        OpcUaInterface.StartProduction.WorkOrderRequest := TRUE;
-        OpcUaInterface.StartProduction.WorkOrderNumber := DataStartProduction.WorkOrderNumber;
-    ELSIF 'Entire cell' = DataStartProduction.Area THEN
-        OpcUaInterface.StartProduction.EntireCellRequest := TRUE;
-    ELSIF 'Side A' = DataStartProduction.Area THEN
-        OpcUaInterface.StartProduction.SideARequest := TRUE;        
-    ELSIF 'Side B' = DataStartProduction.Area THEN
-        OpcUaInterface.StartProduction.SideBRequest := TRUE;
+    //Replace the code by yours
+    IF '' <> OpcUaCell.Methods.MyMethodName.WorkOrderNumber THEN
+        OpcUaInterface.Methods.MyMethodName.WorkOrderRequest := TRUE;
+        OpcUaInterface.Methods.MyMethodName.Data.WorkOrderNumber := OpcUaCell.Methods.MyMethodName.WorkOrderNumber;
+        MethodStartProductionDone := TRUE;
+    ELSIF 'Entire cell' = OpcUaCell.Methods.MyMethodName.Area THEN
+        OpcUaInterface.Methods.MyMethodName.EntireCellRequest := TRUE;        
+    ELSIF 'Side A' = OpcUaCell.Methods.MyMethodName.Area THEN
+        OpcUaInterface.Methods.MyMethodName.SideARequest := TRUE;    
+    ELSIF 'Side B' = OpcUaCell.Methods.MyMethodName.Area THEN
+        OpcUaInterface.Methods.MyMethodName.SideBRequest := TRUE;
     ELSE
-        OpcUaInterface.ErrorInterfaceID := StartProduction;
-    END_IF;
-    
-    MethodStartProductionDone := TRUE;
-END_IF;
+        OpcUaInterface.ErrorInterfaceID := MyMethodName;
+        OpcUaCell.Methods.MyMethodName.Status := FALSE;
+    END_IF        
+END_IF
 
-FbMethodStartProduction(ExecutionFinished := MethodStartProductionDone);
+FbMethodName();
 ```
 
 📌 The logic inside the `IF` block should be replaced with the specific actions required for your application.
@@ -77,15 +71,15 @@ To declare an OPC UA method in Automation Studio:
 ### Example `.uam` Method Declaration 📄
 
 ```structured-text
-OPCUA_METHOD StartProduction
+OPCUA_METHOD MyMethodName
     ARG_INPUT
-        WorkOrderNumber : String := DataStartProduction.WorkOrderNumber;
-        Area : String := DataStartProduction.Area;
+        WorkOrderNumber : String := MyMethodName.WorkOrderNumber;
+        Area : String := MyMethodName.Area;
     END_ARG
 END_OPCUA_METHOD
 ```
 
-📌 The `.uam` file registers `StartProduction` as an OPC UA method.
+📌 The `.uam` file registers `MyMethodName` as an OPC UA method.
 📌 The method takes two input arguments: `WorkOrderNumber` and `Area`.
 📌 The values of these arguments are linked to process variables on the server.
 
