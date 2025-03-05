@@ -1,4 +1,4 @@
-# Declaring a Method on the OPC UA Server 📡🛠️
+# Declaring a Method on the OPC UA as server 📡🛠️
 
 ## Overview 🚀
 
