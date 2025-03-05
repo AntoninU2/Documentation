@@ -18,20 +18,20 @@ Before establishing a connection, declare the connection function block:
 ```structured-text
 (* Connect to Ltu server *)
 VAR
-    FbOpcUaConnectLathingA1 : FB_OpcUaCli_Connect;
+    FbOpcUaConnectToServer : FB_OpcUaCli_Connect;
 END_VAR
 ```
 
 ### Connection Setup ⚙️
 
-To establish a connection to the OPC UA server, use the `FbOpcUaConnectLathingA1` function block as follows:
+To establish a connection to the OPC UA server, use the `FbOpcUaConnectToServer` function block as follows:
 
 ```structured-text
-FbOpcUaConnectLathingA1.Connect := ServerState = UASS_Running;
-FbOpcUaConnectLathingA1.Reset := gBP.ErrorReset;
-FbOpcUaConnectLathingA1.ServerEndpointUrl := 'opc.tcp://opcuaserver.com:48010';
-FbOpcUaConnectLathingA1.NamespaceUri := 'http://www.unifiedautomation.com/DemoServer/';
-FbOpcUaConnectLathingA1();
+FbOpcUaConnectToServer.Connect := ServerState = UASS_Running;
+FbOpcUaConnectToServer.Reset := gBP.ErrorReset;
+FbOpcUaConnectToServer.ServerEndpointUrl := 'opc.tcp://opcuaserver.com:48010';
+FbOpcUaConnectToServer.NamespaceUri := 'http://www.unifiedautomation.com/DemoServer/';
+FbOpcUaConnectToServer();
 ```
 
 ### Explanation 🔍
