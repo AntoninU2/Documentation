@@ -2,7 +2,7 @@
 
 ## Overview 🚀
 
-This guide explains how to use the `UaSrv_GetServerState` function to retrieve the current state of an OPC UA server. The function provides an enumeration representing different server states.
+This guide explains how to use the `UaSrv_GetServerState` function to retrieve the current state of the CPU OPC UA server. The function provides an enumeration representing different server states.
 
 ## Function Description 🛠️
 
