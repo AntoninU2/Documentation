@@ -2,12 +2,36 @@
 
 ## Overview 🚀
 
-This guide provides instructions on how to implement monitoring using OPC UA with `FbMonitorLathingA1`. It includes setting up monitored items, handling subscriptions, and managing monitored values.
+This guide provides instructions on how to implement monitoring using OPC UA with `FbMonitorVariables`. It includes setting up monitored items, handling subscriptions, and managing monitored values.
 
 ## Prerequisites ✅
 
 - An operational OPC UA server.
 - A properly configured PLC with OPC UA capabilities.
+
+## Function Block Structure
+
+### `FB_OpcUaCli_Monitor`
+
+This function block is responsible for managing OPC UA monitoring operations.
+
+#### Input Variables:
+
+- **Execute**: Set to TRUE to initiate monitoring.
+- **Reset**: Resets monitoring in case of errors.
+- **NbMonitoredItems**: Defines the number of variables to monitor.
+- **ConnectionHdl**: The active OPC UA connection handle.
+- **NodeID\_0**: An array of Node IDs corresponding to the monitored items.
+  - **NamespaceIndex**: Specifies the namespace index of the node.
+  - **Identifier**: The unique identifier of the monitored item.
+  - **IdentifierType**: Specifies the type of identifier (`String`, `Numeric`, etc.).
+- **Variable**: An array of variables in the PLC mapped to monitored values.
+
+#### Output Variables:
+
+- **Error**: Indicates if an error occurred.
+- **ErrorID**: Provides an error identifier.
+- **SubscriptionHdl**: Handle for the created subscription.
 
 ## Setting Up Monitoring 🔧
 
@@ -18,37 +42,39 @@ Before enabling monitoring, declare the monitoring function block:
 ```structured-text
 (* Monitoring setup *)
 VAR
-    FbMonitorLathingA1 : FB_OpcUaCli_Monitor;
+    FbMonitorVariables  : FB_OpcUaCli_Monitor;
 END_VAR
 ```
 
-📌 Declare `FbMonitorLathingA1` to manage OPC UA monitoring.
-
 ### Monitoring Configuration ⚙️
 
-To set up monitored items, configure `FbMonitorLathingA1` as follows:
+To set up monitored items, configure `FbMonitorVariables` as follows:
 
 ```structured-text
-(***************** Monitoring*****************)
-FbMonitorLathingA1.Execute := 2;
-FbMonitorLathingA1.Reset := gBP.ErrorReset;
-FbMonitorLathingA1.NbMonitoredItems := 2;
-FbMonitorLathingA1.ConnectionHdl := FbOpcUaConnectLathingA1.ConnectionHdl;
+(***************** Monitoring *****************)
+FbMonitorVariables .Execute             := TRUE;
+FbMonitorVariables .Reset               := gBP.ErrorReset;
+FbMonitorVariables .NbMonitoredItems    := 2;
+FbMonitorVariables .ConnectionHdl       := FbOpcUaConnectLathingA1.ConnectionHdl;
 
-FbMonitorLathingA1.NodeID_0[0].NamespaceIndex := 2;
-FbMonitorLathingA1.NodeID_0[0].Identifier := 'Demo.Dynamic.Scalar.String';
-FbMonitorLathingA1.NodeID_0[0].IdentifierType := UAIdentifierType_String;
-FbMonitorLathingA1.Variable[0] := '::UM_Logic:MonitorLtuRecipeName';
+  FbMonitorVariables .NodeID_0[0].NamespaceIndex    := 2;
+FbMonitorVariables .NodeID_0[0].Identifier          := 'Demo.Dynamic.Scalar.String';
+FbMonitorVariables .NodeID_0[0].IdentifierType      := UAIdentifierType_String;
+FbMonitorVariables .Variable[0]                     := '::UM_Logic:MonitorLtuRecipeName';
 
-FbMonitorLathingA1.NodeID_0[1].NamespaceIndex := 3;
-FbMonitorLathingA1.NodeID_0[1].Identifier := 'Demo.Dynamic.Scalar.DateTime';
-FbMonitorLathingA1.NodeID_0[1].IdentifierType := UAIdentifierType_String;
-FbMonitorLathingA1.Variable[1] := '::UM_Logic:MonitorLtuRecipeName1';
+FbMonitorVariables .NodeID_0[1].NamespaceIndex     := 3;
+FbMonitorVariables .NodeID_0[1].Identifier         := 'Demo.Dynamic.Scalar.DateTime';
+FbMonitorVariables .NodeID_0[1].IdentifierType     := UAIdentifierType_String;
+FbMonitorVariables .Variable[1]                    := '::UM_Logic:MonitorLtuRecipeName1';
 ```
 
-📌 Ensure `Execute` is enabled when the connection is active.
-📌 Set `NbMonitoredItems` to define the number of monitored variables.
-📌 Map each monitored item to a local variable.
+### Explanation 🔍
+
+- `Execute`: Controls whether monitoring is active.
+- `NbMonitoredItems`: Specifies how many variables are monitored.
+- `ConnectionHdl`: Ensures the connection to the OPC UA server is active.
+- `NodeID_0`: Specifies the nodes being monitored.
+- `Variable`: Maps monitored items to PLC variables.
 
 ## Function Block `FB_OpcUaCli_Monitor` 🔄
 
