@@ -50,7 +50,7 @@ To find the **Namespace Index**, **Identifier**, and **Identifier Type** in **Ua
 2. Open the **Address Space** tab.
 3. Select a node and check its **Namespace Index**, **Identifier**, and **Identifier Type** in the properties pane.
 
-!UaExpert showing Namespace Index, Identifier, and Identifier](C:\Users\aesseul\Pictures\NameSpace.PNG "UaExpert NameSpaceURI")
+![UaExpert showing Namespace Index, Identifier, and Identifier](C:\Users\aesseul\Pictures\NameSpace.PNG "UaExpert NameSpaceURI")
 
 ### Types of Node Identifiers:
 
