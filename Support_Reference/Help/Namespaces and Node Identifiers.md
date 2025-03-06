@@ -17,7 +17,7 @@ To find the **Namespace URI** in **UaExpert**:
 2. Open the **Address Space** tab.
 3. Select a node and check its **Namespace URI** in the properties pane.
 
-![UaExpert showing Namespace URIs]((https://github.com/AntoninU2/Documentation/blob/main/Support_Reference/Pictures/NameSpaceURI.PNG) "UaExpert NameSpaceURI")
+<img src="https://github.com/AntoninU2/Documentation/blob/main/Support_Reference/Pictures/NameSpaceURI.PNG" alt="UaExpert NameSpaceURI" width="600" />
 
 ## Namespace Index (NamespaceIndex) 🔢
 
@@ -50,7 +50,7 @@ To find the **Namespace Index**, **Identifier**, and **Identifier Type** in **Ua
 2. Open the **Address Space** tab.
 3. Select a node and check its **Namespace Index**, **Identifier**, and **Identifier Type** in the properties pane.
 
-![UaExpert showing Namespace Index, Identifier, and Identifier]((https://github.com/AntoninU2/Documentation/blob/main/Support_Reference/Pictures/NameSpace.PNG)"UaExpert Node ID")
+<img src="https://github.com/AntoninU2/Documentation/blob/main/Support_Reference/Pictures/NameSpace.PNG" alt="UaExpert Node ID" width="700" />
 
 ### Types of Node Identifiers:
 
