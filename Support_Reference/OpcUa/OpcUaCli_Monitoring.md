@@ -29,8 +29,10 @@ This function block is responsible for managing OPC UA monitoring operations.
 
 #### Output Variables:
 
-- **Error**: Indicates if an error occurred.
-- **ErrorID**: Provides an error identifier.
+- **Done**: `TRUE` if the reading process is successfully completed.
+- **Error**: `TRUE` if an error occurs during the reading process.
+- **ErrorIndex**: Index of the node that caused an error.
+- **ErrorID**: Error identifier providing details on the issue.
 
 ## Setting Up Monitoring 🔧
 
