@@ -32,10 +32,10 @@ This function block reads values from specified OPC UA nodes and writes them to 
 
 #### Output Variables:
 
-- **Done**: (`BOOL`) `TRUE` if the reading process is successfully completed.
-- **Error**: (`BOOL`) `TRUE` if an error occurs during the reading process.
-- **ErrorIndex**: (`USINT`) Index of the node that caused an error.
-- **ErrorID**: (`DWORD`) Error identifier providing details on the issue.
+- **Done**: `TRUE` if the reading process is successfully completed.
+- **Error**: `TRUE` if an error occurs during the reading process.
+- **ErrorIndex**: Index of the node that caused an error.
+- **ErrorID**: Error identifier providing details on the issue.
 
 ## Understanding Node ID and Namespace 🔍
 
