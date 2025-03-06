@@ -105,7 +105,7 @@ FbOpcUaRead();
 - `NodeID_0`: Defines the node IDs to read.
 - `Variable`: Specifies the corresponding PLC variables to store the read values.
 
-## FB_OpcUaCli_Read Steps 🔄
+## Function Block `FB_OpcUaCli_Read Steps` 🔄
 
 The function block `FB_OpcUaCli_Read` handles reading data from an OPC UA server in multiple steps:
 
