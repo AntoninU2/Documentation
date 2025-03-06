@@ -18,13 +18,17 @@ This function block reads values from specified OPC UA nodes and writes them to 
 
 #### Input Variables:
 
-- **ConnectionHdl**: (`DWORD`) Connection handle obtained from `FB_OpcUaCli_Connect`.
-- **Execute**: (`BOOL`) Set to `TRUE` to start the read process.
-- **Reset**: (`BOOL`) Set to `TRUE` to reset the function block after an error.
-- **IsActive**: (`ARRAY[0..MAX_ELEMENTS_READ] OF BOOL`) Specifies which nodes should be read.
-- **NodeID\_0**: (`ARRAY[0..MAX_ELEMENTS_READ] OF UANodeID`) Defines the node IDs to be read from the OPC UA server.
-- **NodeAddInfo\_0**: (`ARRAY[0..MAX_ELEMENTS_READ] OF UANodeAdditionalInfo`) Additional node information if required.
-- **Variable**: (`ARRAY[0..MAX_ELEMENTS_READ] OF STRING[255]`) Local PLC variables to store the read values.
+- **Execute**: Set to TRUE to initiate monitoring.
+- **Reset**: Resets monitoring in case of errors.
+- **ConnectionHdl**: The active OPC UA connection handle.
+- **IsActive**: Active or not the actual variable for monitoring.
+- **NodeID\_0**: An array of Node IDs corresponding to the monitored items.
+  - **NamespaceIndex**: Specifies the namespace index of the node.
+  - **Identifier**: The unique identifier of the monitored item.
+  - **IdentifierType**: Specifies the type of identifier (`String`, `Numeric`, etc.).
+- **Variable**: An array of variables in the PLC mapped to monitored values.
+- **NodeAddInfo\_0**: Additional node information if required.
+
 
 #### Output Variables:
 
