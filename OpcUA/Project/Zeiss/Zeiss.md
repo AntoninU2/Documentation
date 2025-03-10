@@ -29,7 +29,7 @@ Ces structures contiennent des sous-structures et servent de passerelle entre l'
 
 Chaque variable de l'interface suit une règle stricte de passage par une variable OPC UA avant d'être utilisée. Exemple de liaison entre une variable de production et l'OPC UA :
 
-```pascal
+```structured-text
 OpcUaInterface.Methods.HoldProduction.Data.WorkOrderNumber		:= OpcUaCell.Methods.HoldProduction.WorkOrderNumber;
 ```
 
