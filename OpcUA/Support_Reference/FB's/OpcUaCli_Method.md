@@ -79,6 +79,10 @@ FbMethodMultiply.OutputArguments[0].Name        := 'result';
 FbMethodMultiply.OutputArguments[0].Value       := '::UM_Logic:Output';
 
 FbMethodMultiply();
+
+IF FbMethodMultiply.Done THEN
+    ExecuteMethod1 := FALSE;
+END_IF
 ```
 
 ### Explanation 🔍
