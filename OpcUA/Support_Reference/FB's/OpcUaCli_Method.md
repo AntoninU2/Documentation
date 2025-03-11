@@ -47,9 +47,9 @@ END_VAR
 
 (* Method variables Setup *)
 VAR
-    Input1 : REAL;
-    Input2 : REAL;
-    Output : REAL;
+    Input1 : LREAL;
+    Input2 : LREAL;
+    Output : LREAL;
 END_VAR
 ```
 ### Configuring the Method Call 🔧
