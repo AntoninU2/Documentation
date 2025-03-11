@@ -59,6 +59,7 @@ Declare an instance of `FB_OpcUaCli_Write` in your PLC program:
 ```structured-text
 VAR
     FbOpcUaWrite : FB_OpcUaCli_Write;
+    ExecuteWrite : BOOL;
     Variable1 : INT;
     Variable2 : INT;
     Variable3 : INT;
@@ -70,7 +71,7 @@ END_VAR
 To write values to the OPC UA server, configure the function block as follows:
 
 ```structured-text
-FbOpcUaWrite.Execute         := TRUE;
+FbOpcUaWrite.Execute         := ExecuteWrite;
 FbOpcUaWrite.Reset           := gBP.ErrorReset;
 FbOpcUaWrite.ConnectionHdl   := FbOpcUaConnectLathingA1.ConnectionHdl;
 
@@ -93,6 +94,10 @@ FbOpcUaWrite.NodeID_0[2].IdentifierType   := UAIdentifierType_String;
 FbOpcUaWrite.Variable[2]                  := '::UM_Logic:Variable3';
 
 FbOpcUaWrite();
+
+IF FbOpcUaWrite.Done THEN
+  ExecuteWrite := FALSE;
+END_IF
 ```
 
 ### **Explanation 🔍**
