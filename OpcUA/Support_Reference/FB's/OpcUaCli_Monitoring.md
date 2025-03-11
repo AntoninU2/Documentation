@@ -22,9 +22,6 @@ This function block is responsible for managing OPC UA monitoring operations.
 - **ConnectionHdl**: The active OPC UA connection handle.
 - **IsActive**: Active or not the actual variable for monitoring.
 - **NodeID\_0**: An array of Node IDs corresponding to the monitored items.
-  - **NamespaceIndex**: Specifies the namespace index of the node.
-  - **Identifier**: The unique identifier of the monitored item.
-  - **IdentifierType**: Specifies the type of identifier (`String`, `Numeric`, etc.).
 - **Variable**: An array of variables in the PLC mapped to monitored values.
 
 #### Output Variables:
@@ -49,8 +46,8 @@ END_VAR
 ```structured-text
 (* Monitoring variables *)
 VAR
-    MonitorMachineRate   : REAL;
-    MonitorMachineStart  : BOOL;
+    Variable1 : LREAL;
+    MonitorMachineStart : BOOL;
 END_VAR
 ```
 ### Monitoring Configuration ⚙️
@@ -64,23 +61,19 @@ FbMonitorVariables.Reset               := gBP.ErrorReset;
 FbMonitorVariables.ConnectionHdl       := FbOpcUaConnectToServer.ConnectionHdl;
 
 FbMonitorVariables.IsActive[0]                   := TRUE;
-FbMonitorVariables.NodeID_0[0].NamespaceIndex    := FbOpcUaConnectToServer.NamespaceIndex; //Index of the URI namespace
-FbMonitorVariables.NodeID_0[0].Identifier        := 'Demo.Dynamic.Scalar.String';
-FbMonitorVariables.NodeID_0[0].IdentifierType    := UAIdentifierType_String;
-FbMonitorVariables.Variable[0]                   := '::UM_Logic:MonitorMachineRate';
+FbMonitorVariables.NodeID_0[0].                  := 'ns=2;s=Demo.Dynamic.Scalar.Double'; //Node ID
+FbMonitorVariables.Variable[0]                   := '::UM_Logic:Variable1';
 
 FbMonitorVariables.IsActive[1]                   := TRUE;
-FbMonitorVariables.NodeID_0[1].NamespaceIndex    := 3;    //Index of the specific namespace
-FbMonitorVariables.NodeID_0[1].Identifier        := 'Demo.Dynamic.Scalar.DateTime';
-FbMonitorVariables.NodeID_0[1].IdentifierType    := UAIdentifierType_String;
+FbMonitorVariables.NodeID_0[1].NamespaceIndex    := 'ns=2;s=Demo.Dynamic.Scalar.Boolean'; //Node ID
 FbMonitorVariables.Variable[1]                   := '::UM_Logic:MonitorMachineStart';
 ```
 
 ### Explanation 🔍
 
 - `Execute`: Controls whether monitoring is active.
-- `IsActive`: Specifies if the variable is monitored.
 - `ConnectionHdl`: Ensures the connection to the OPC UA server is active.
+- `IsActive`: Specifies if the variable is monitored.
 - `NodeID_0`: Specifies the nodes being monitored.
 - `Variable`: Maps monitored items to PLC variables.
 
