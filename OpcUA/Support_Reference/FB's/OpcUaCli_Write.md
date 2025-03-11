@@ -23,9 +23,6 @@ This function block writes values from specified local PLC variables to OPC UA n
 - **ConnectionHdl**: The active OPC UA connection handle.
 - **IsActive**: Defines which variables should be written to the OPC UA server.
 - **NodeID_0**: An array of Node IDs corresponding to the target OPC UA nodes.
-  - **NamespaceIndex**: Specifies the namespace index of the node.
-  - **Identifier**: The unique identifier of the target node.
-  - **IdentifierType**: Specifies the type of identifier (`String`, `Numeric`, etc.).
 - **Variable**: An array of PLC variables mapped to OPC UA node values.
 - **NodeAddInfo_0**: Additional node information if required.
 
@@ -36,19 +33,15 @@ This function block writes values from specified local PLC variables to OPC UA n
 - **ErrorIndex**: Index of the node that caused an error.
 - **ErrorID**: Error identifier providing details on the issue.
 
-## Understanding Node ID and Namespace 🔍
-
 ### **What is a Node ID?**
 
 A Node ID uniquely identifies an item in the OPC UA server. It consists of:
 
-- **NamespaceIndex** (`UINT`): Specifies which namespace the node belongs to.
-- **Identifier** (`STRING` or `UINT`): Unique identifier of the node.
-- **IdentifierType**: Specifies the type of identifier (`Numeric`, `String`, etc.).
+`ns=2;s=Demo.Dynamic.Scalar.Boolean`
 
-### **What is a Namespace?**
-
-Namespaces are used to distinguish between different vendors or components within an OPC UA server. Each namespace has an associated index that is retrieved using `UA_GetNamespaceIndex`.
+- **NamespaceIndex** `ns=2`: Specifies which namespace the node belongs to.
+- **Identifier** `Demo.Dynamic.Scalar.Boolean`, (`STRING` or `UINT`): Unique identifier of the node.
+- **IdentifierType**: `s=` or `i=` Specifies the type of identifier (`Numeric`, `String`, etc.).
 
 ## Implementation 🛠️
 
@@ -60,9 +53,9 @@ Declare an instance of `FB_OpcUaCli_Write` in your PLC program:
 VAR
     FbOpcUaWrite : FB_OpcUaCli_Write;
     ExecuteWrite : BOOL;
-    Variable1 : INT;
-    Variable2 : INT;
-    Variable3 : INT;
+    Variable1 : BOOL;
+    Variable2 : LREAL;
+    Variable3 : STRING[255];
 END_VAR
 ```
 
@@ -76,22 +69,16 @@ FbOpcUaWrite.Reset           := gBP.ErrorReset;
 FbOpcUaWrite.ConnectionHdl   := FbOpcUaConnectLathingA1.ConnectionHdl;
 
 FbOpcUaWrite.IsActive[0] := TRUE;
-FbOpcUaWrite.NodeID_0[0].NamespaceIndex   := 2;
-FbOpcUaWrite.NodeID_0[0].Identifier       := 'Demo.Static.Scalar.Int16';
-FbOpcUaWrite.NodeID_0[0].IdentifierType   := UAIdentifierType_String;
-FbOpcUaWrite.Variable[0]                  := '::UM_Logic:Variable1';
+FbOpcUaWrite.NodeID_0[0] := ns=2;s=Demo.Dynamic.Scalar.Boolean;
+FbOpcUaWrite.Variable[0] := '::UM_Logic:Variable1';
 
 FbOpcUaWrite.IsActive[1] := FALSE;
-FbOpcUaWrite.NodeID_0[1].NamespaceIndex   := 2;
-FbOpcUaWrite.NodeID_0[1].Identifier       := 'Demo.Static.Scalar.Int16';
-FbOpcUaWrite.NodeID_0[1].IdentifierType   := UAIdentifierType_String;
-FbOpcUaWrite.Variable[1]                  := '::UM_Logic:Variable2';
+FbOpcUaWrite.NodeID_0[1] := ns=2;s=Demo.Dynamic.Scalar.Double;
+FbOpcUaWrite.Variable[1] := '::UM_Logic:Variable2';
 
-FbOpcUaWrite.IsActive[2]                  := TRUE;
-FbOpcUaWrite.NodeID_0[2].NamespaceIndex   := 2;
-FbOpcUaWrite.NodeID_0[2].Identifier       := 'Demo.Static.Scalar.Int16';
-FbOpcUaWrite.NodeID_0[2].IdentifierType   := UAIdentifierType_String;
-FbOpcUaWrite.Variable[2]                  := '::UM_Logic:Variable3';
+FbOpcUaWrite.IsActive[2] := TRUE;
+FbOpcUaWrite.NodeID_0[2] := ns=2;s=Demo.Dynamic.Scalar.String;
+FbOpcUaWrite.Variable[2] := '::UM_Logic:Variable3';;
 
 FbOpcUaWrite();
 
@@ -129,4 +116,4 @@ The function block `FB_OpcUaCli_Write` handles writing data to an OPC UA server 
 
 ## Conclusion 🎯
 
-This guide provides step-by-step instructions on how to configure and use `FB_OpcUaCli_Write` to send data from the PLC to an OPC UA server. Ensure that your `NodeID_0` settings and namespace indexes are correctly configured for a successful implementation.
+This guide provides step-by-step instructions on how to configure and use `FB_OpcUaCli_Write` to send data from the PLC to an OPC UA server. Ensure that your `NodeID_0` setting is correctly configured for a successful implementation.
