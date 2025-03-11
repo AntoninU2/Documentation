@@ -22,9 +22,9 @@ This function block reads values from specified OPC UA nodes and writes them to 
 - **Reset**: Resets monitoring in case of errors.
 - **ConnectionHdl**: The active OPC UA connection handle.
 - **IsActive**: Active or not the actual variable for monitoring.
-- **NodeID\_0**: An array of Node IDs corresponding to the monitored items.
+- **NodeID**: An array of Node IDs corresponding to the monitored items.
 - **Variable**: An array of variables in the PLC mapped to monitored values.
-- **NodeAddInfo\_0**: Additional node information if required.
+- **NodeAddInfo**: Additional node information if required.
 
 
 #### Output Variables:
@@ -72,15 +72,15 @@ FbOpcUaRead.Reset           := gBP.ErrorReset;
 FbOpcUaRead.ConnectionHdl   := FbOpcUaConnectToServer.ConnectionHdl;
 
 FbOpcUaRead.IsActive[0] := TRUE;
-FbOpcUaRead.NodeID_0[0] := ns=2;s=Demo.Dynamic.Scalar.Boolean;
+FbOpcUaRead.NodeID[0]   := ns=2;s=Demo.Dynamic.Scalar.Boolean;
 FbOpcUaRead.Variable[0] := '::UM_Logic:Variable1';
 
 FbOpcUaRead.IsActive[1] := FALSE;
-FbOpcUaRead.NodeID_0[1] := ns=2;s=Demo.Dynamic.Scalar.Double;
+FbOpcUaRead.NodeID[1]   := ns=2;s=Demo.Dynamic.Scalar.Double;
 FbOpcUaRead.Variable[1] := '::UM_Logic:Variable2';
 
 FbOpcUaRead.IsActive[2] := TRUE;
-FbOpcUaRead.NodeID_0[2] := ns=2;s=Demo.Dynamic.Scalar.String;
+FbOpcUaRead.NodeID[2]   := ns=2;s=Demo.Dynamic.Scalar.String;
 FbOpcUaRead.Variable[2] := '::UM_Logic:Variable3';
 
 FbOpcUaRead();
@@ -96,7 +96,7 @@ END_IF
 - `Reset`: Resets the function block in case of an error.
 - `ConnectionHdl`: Provides the connection handle for OPC UA communication.
 - `IsActive`: Determines which nodes should be read.
-- `NodeID_0`: Defines the node IDs to read.
+- `NodeID`: Defines the node IDs to read.
 - `Variable`: Specifies the corresponding PLC variables to store the read values.
 
 ## Function Block `FB_OpcUaCli_Read Steps` 🔄
@@ -119,5 +119,5 @@ The function block `FB_OpcUaCli_Read` handles reading data from an OPC UA server
 
 ## Conclusion 🎯
 
-This guide provides step-by-step instructions on how to configure and use `FB_OpcUaCli_Read` to retrieve data from an OPC UA server. Ensure that your `NodeID_0` setting are correctly configured for a successful implementation.
+This guide provides step-by-step instructions on how to configure and use `FB_OpcUaCli_Read` to retrieve data from an OPC UA server. Ensure that your `NodeID` setting are correctly configured for a successful implementation.
 
