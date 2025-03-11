@@ -119,5 +119,5 @@ The function block `FB_OpcUaCli_Read` handles reading data from an OPC UA server
 
 ## Conclusion 🎯
 
-This guide provides step-by-step instructions on how to configure and use `FB_OpcUaCli_Read` to retrieve data from an OPC UA server. Ensure that your `NodeID_0` settings and namespace indexes are correctly configured for a successful implementation.
+This guide provides step-by-step instructions on how to configure and use `FB_OpcUaCli_Read` to retrieve data from an OPC UA server. Ensure that your `NodeID_0` setting are correctly configured for a successful implementation.
 
