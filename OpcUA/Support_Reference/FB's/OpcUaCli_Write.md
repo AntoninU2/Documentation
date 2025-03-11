@@ -22,9 +22,9 @@ This function block writes values from specified local PLC variables to OPC UA n
 - **Reset**: Resets the function block in case of errors.
 - **ConnectionHdl**: The active OPC UA connection handle.
 - **IsActive**: Defines which variables should be written to the OPC UA server.
-- **NodeID_0**: An array of Node IDs corresponding to the target OPC UA nodes.
+- **NodeID**: An array of Node IDs corresponding to the target OPC UA nodes.
 - **Variable**: An array of PLC variables mapped to OPC UA node values.
-- **NodeAddInfo_0**: Additional node information if required.
+- **NodeAddInfo**: Additional node information if required.
 
 #### Output Variables:
 
@@ -69,15 +69,15 @@ FbOpcUaWrite.Reset           := gBP.ErrorReset;
 FbOpcUaWrite.ConnectionHdl   := FbOpcUaConnectLathingA1.ConnectionHdl;
 
 FbOpcUaWrite.IsActive[0] := TRUE;
-FbOpcUaWrite.NodeID_0[0] := ns=2;s=Demo.Dynamic.Scalar.Boolean;
+FbOpcUaWrite.NodeID[0]   := ns=2;s=Demo.Dynamic.Scalar.Boolean;
 FbOpcUaWrite.Variable[0] := '::UM_Logic:Variable1';
 
 FbOpcUaWrite.IsActive[1] := FALSE;
-FbOpcUaWrite.NodeID_0[1] := ns=2;s=Demo.Dynamic.Scalar.Double;
+FbOpcUaWrite.NodeID[1]   := ns=2;s=Demo.Dynamic.Scalar.Double;
 FbOpcUaWrite.Variable[1] := '::UM_Logic:Variable2';
 
 FbOpcUaWrite.IsActive[2] := TRUE;
-FbOpcUaWrite.NodeID_0[2] := ns=2;s=Demo.Dynamic.Scalar.String;
+FbOpcUaWrite.NodeID[2]   := ns=2;s=Demo.Dynamic.Scalar.String;
 FbOpcUaWrite.Variable[2] := '::UM_Logic:Variable3';;
 
 FbOpcUaWrite();
@@ -93,7 +93,7 @@ END_IF
 - `Reset`: Resets the function block in case of an error.
 - `ConnectionHdl`: Provides the connection handle for OPC UA communication.
 - `IsActive`: Determines which nodes should be written to.
-- `NodeID_0`: Defines the node IDs to write.
+- `NodeID`: Defines the node IDs to write.
 - `Variable`: Specifies the corresponding PLC variables storing the values.
 
 ## Function Block `FB_OpcUaCli_Write Steps` 🔄
@@ -116,4 +116,4 @@ The function block `FB_OpcUaCli_Write` handles writing data to an OPC UA server 
 
 ## Conclusion 🎯
 
-This guide provides step-by-step instructions on how to configure and use `FB_OpcUaCli_Write` to send data from the PLC to an OPC UA server. Ensure that your `NodeID_0` setting is correctly configured for a successful implementation.
+This guide provides step-by-step instructions on how to configure and use `FB_OpcUaCli_Write` to send data from the PLC to an OPC UA server. Ensure that your `NodeID` setting is correctly configured for a successful implementation.
