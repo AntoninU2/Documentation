@@ -18,7 +18,6 @@ This function block establishes and manages an OPC UA connection.
 #### Input Variables:
 - **UserInfos**: User authentication credentials.
 - **ServerEndpointUrl**: The URL of the OPC UA server.
-- **NamespaceUri**: Namespace URI for communication.
 - **Connect**: Set to `TRUE` to initiate a connection.
 - **Disconnect**: Set to `TRUE` to disconnect from the server.
 - **Reset**: Set to `TRUE` to reset the connection in case of an error.
@@ -27,7 +26,6 @@ This function block establishes and manages an OPC UA connection.
 - **Connected**: `TRUE` if the connection is successful.
 - **Error**: `TRUE` if an error occurs.
 - **ErrorID**: Error identifier.
-- **NamespaceIndex**: The retrieved namespace index.
 - **ConnectionHdl**: Connection handle.
 
 ## Establishing a Connection to the Ltu LathingA1 OPC UA Server 📎🛏
@@ -51,7 +49,6 @@ To establish a connection to the OPC UA server, configure the function block as 
 FbOpcUaConnectToServer.Connect := TRUE;
 FbOpcUaConnectToServer.Reset := gBP.ErrorReset;
 FbOpcUaConnectToServer.ServerEndpointUrl := 'opc.tcp://opcuaserver.com:48010';
-FbOpcUaConnectToServer.NamespaceUri := 'http://www.unifiedautomation.com/DemoServer/';
 FbOpcUaConnectToServer();
 ```
 
@@ -60,7 +57,6 @@ FbOpcUaConnectToServer();
 - `Connect`: Initiates the connection when the server is running.
 - `Reset`: Resets the connection in case of an error.
 - `ServerEndpointUrl`: Specifies the address of the OPC UA server.
-- `NamespaceUri`: Defines the namespace for communication.
 
 ## Utilizing `UA_Connect` 🔌
 
@@ -101,45 +97,14 @@ END_IF
 - Establishes a connection to the OPC UA server.
 - Checks for a successful connection and stores the connection handle.
 
-## Retrieving the Namespace Index Using `UA_GetNamespaceIndex` 🔍
-
-This function block reads the namespace index from the OPC UA server.
-
-### Code Example 🖥️
-
-```structured-text
-UA_GetNamespaceIndex_0(Execute := ExecuteGetnamespaceindex_0,
-    ConnectionHdl := ConnectionHdl,
-    NamespaceUri := 'http://br-automation.com/OpcUa/PLC/PV/',
-    Timeout := T#5s);
-
-IF (UA_GetNamespaceIndex_0.Busy = 0) THEN
-    ExecuteGetnamespaceindex_0 := 0;
-    IF (UA_GetNamespaceIndex_0.Done = 1) THEN
-        NamespaceIndex := UA_GetNamespaceIndex_0.NamespaceIndex;
-    END_IF
-    IF (UA_GetNamespaceIndex_0.Error = 1) THEN
-        NamespaceIndex := 0;
-    END_IF
-END_IF
-```
-
-### Explanation 🤨
-
-- `Execute`: Initiates execution of the function block.
-- `ConnectionHdl`: Uses the established connection handle.
-- `NamespaceUri`: Specifies the namespace URI to retrieve.
-- `Timeout`: Defines the execution timeout.
-
 ## Troubleshooting 🛠️
 
 | Issue                 | Possible Cause                | Solution                       |
 | --------------------- | ----------------------------- | ------------------------------ |
 | Connection failure    | Incorrect `ServerEndpointUrl` | Verify server address and port |
 | Authentication error  | Incorrect username/password   | Ensure correct credentials     |
-| Namespace index error | Incorrect `NamespaceUri`      | Verify the namespace URI       |
 
 ## Conclusion 🎯💪
 
-This document provides a step-by-step guide on establishing an OPC UA connection, retrieving namespace indices, and troubleshooting potential issues. Ensure that your PLC configuration and server details are correctly set up for successful implementation.
+This document provides a step-by-step guide on establishing an OPC UA connection and troubleshooting potential issues. Ensure that your PLC configuration and server details are correctly set up for successful implementation.
 
