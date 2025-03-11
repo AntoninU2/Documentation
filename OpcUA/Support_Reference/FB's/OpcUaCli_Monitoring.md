@@ -65,7 +65,7 @@ FbMonitorVariables.NodeID[0]          := 'ns=2;s=Demo.Dynamic.Scalar.Double'; //
 FbMonitorVariables.Variable[0]        := '::UM_Logic:Variable1';
 
 FbMonitorVariables.IsActive[1]        := TRUE;
-FbMonitorVariables.NodeID1]           := 'ns=2;s=Demo.Dynamic.Scalar.Boolean'; //Node ID
+FbMonitorVariables.NodeID[1]           := 'ns=2;s=Demo.Dynamic.Scalar.Boolean'; //Node ID
 FbMonitorVariables.Variable[1]        := '::UM_Logic:MonitorMachineStart';
 ```
 
