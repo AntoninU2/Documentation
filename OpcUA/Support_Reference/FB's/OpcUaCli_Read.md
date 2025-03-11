@@ -60,6 +60,7 @@ Declare an instance of `FB_OpcUaCli_Read` in your PLC program:
 ```structured-text
 VAR
     FbOpcUaRead : FB_OpcUaCli_Read;
+    ExecuteRead : BOOL;
     Variable1 : INT;
     Variable2 : INT;
     Variable3 : INT;
@@ -71,7 +72,7 @@ END_VAR
 To read values from the OPC UA server, configure the function block as follows:
 
 ```structured-text
-FbOpcUaRead.Execute         := TRUE;
+FbOpcUaRead.Execute         := ExecuteRead;
 FbOpcUaRead.Reset           := gBP.ErrorReset;
 FbOpcUaRead.ConnectionHdl   := FbOpcUaConnectToServer.ConnectionHdl;
 
@@ -94,6 +95,10 @@ FbOpcUaRead.NodeID_0[2].IdentifierType   := UAIdentifierType_String;
 FbOpcUaRead.Variable[2]                  := '::UM_Logic:Variable3';
 
 FbOpcUaRead();
+
+IF FbOpcUaRead.Done THEN
+  ExecuteRead := FALSE;
+END_IF
 ```
 
 ### **Explanation 🔍**
