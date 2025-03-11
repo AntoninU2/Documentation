@@ -40,6 +40,7 @@ Before executing a method, declare the function block:
 (* Method Execution Setup *)
 VAR
     FbMethodMultiply : FB_OpcUaCli_Method;
+    ExecuteMethod1 : BOOL;
 END_VAR
 ```
 ```structured-text
